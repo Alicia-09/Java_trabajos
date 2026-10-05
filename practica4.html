@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background: #050b12;
+        text-align: center;
+        font-family: Arial;
+    }
+
+    h1 {
+        color: #29a9ff;
+        font-size: 60px;
+    }
+
+    input{
+        width: 300px;
+        padding: 18px;
+        font-size: 20px;
+    }
+
+    label {
+        font-size: 40px;
+        color: #29a9ff;
+    }
+
+    button{
+        background: #087be0;
+        color: white;
+        padding: 20px;
+        border: none;
+        border-radius: 15px;
+        font-size: 20px;
+    }
+
+
+</style>
+<body onload="comenzarReloj()">
+
+    <label>Ingresa los segundos para tu alarma:</label>
+    <br><br>
+
+    <input type="number" id="tiempo">
+
+    <button onclick="alarma()">Enviar</button>
+
+    <br><br>
+
+    <h1 id="texto">00:00:00</h1>
+
+    <audio src="audio/Alarma.wav" id="sonido" controls></audio>
+
+    <script>
+
+        let elementoSegundos = document.getElementById("tiempo");
+        let elementoTexto = document.getElementById("texto");
+        let elementoSonido = document.getElementById("sonido");
+
+function alarma() {
+
+            // Obtenemos el tiempo que escribió el usuario
+            let segundos = Number(elementoSegundos.value);
+
+            // Comprobamos que haya escrito un número
+            if (segundos <= 0) {
+                alert("Ingresa un número mayor que 0");
+                return;
+            }
+
+            // Mostramos el tiempo inicial
+            elementoTexto.textContent = segundos;
+
+            // Comenzamos la cuenta regresiva
+            intervalo = setInterval(function() {
+
+                segundos--;
+
+                elementoTexto.textContent = segundos;
+
+                // Cuando llega a 0
+                if (segundos == 0) {
+
+                    clearInterval(intervalo);
+
+                    tiempoCumplido();
+                }
+
+            }, 1000);
+        }
+
+     function comenzarTiempo(){
+
+            setTimeout(tiempoCumplido, 1000 * elementoSegundos.value);
+
+        }
+
+        function tiempoCumplido() {
+            elementoTexto.style.color = "green";
+            elementoSonido.play();
+        }
+
+
+        function comenzarReloj() {
+            setInterval(tictac, 1000);
+        }
+
+        function tictac() {
+            let tiempoActual = new Date();
+
+            let hora = String(tiempoActual.getHours()).padStart(2, "0");
+            let minutos = String(tiempoActual.getMinutes()).padStart(2, "0");
+            let segundos = String(tiempoActual.getSeconds()).padStart(2, "0");
+
+            let textoHora = hora + ":" + minutos + ":" + segundos;
+
+            //elementoTexto.textContent = textoHora;
+        }
+
+    </script>
+
+</body>
+</html>

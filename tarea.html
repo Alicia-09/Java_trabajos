@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>Ingresa tu nombre:</label><br><br>
+    <input type="text" id="nombre">
+
+    <button onclick="nombre()"> enviar </button><br><br>
+
+    <label>Ingresa tu apellido:</label><br><br>
+    <input type="text" id="apellido">
+
+    <button onclick="apellido()"> enviar </button><br>
+
+    <h1 id="texto1"> Nombre: </h1><br>
+    <h1 id="texto2"> Apellido: </h1>
+
+    <script>
+        function nombre(){
+            let elementoNombre = document.getElementById("nombre").value;
+            let elementoTexto = document.getElementById("texto1");
+            elementoTexto.textContent = " Nombre: " + elementoNombre 
+        }
+
+        function apellido(){
+            let elementoApellido = document.getElementById("apellido").value;
+            let elementoTexto2 = document.getElementById("texto2");
+            elementoTexto2.textContent = " Apellido: " + elementoApellido 
+        }
+    </script>
+</body>
+</html>
